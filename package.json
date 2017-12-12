@@ -1,10 +1,10 @@
 {
-  "name": "cmake",
-  "version": "3.9.1",
+  "name": "cmake-cli",
+  "version": "0.0.1",
   "description": "",
   "main": "index.js",
   "bin": {
-    "cmake-cli": "cli.js"
+    "cmake": "cli.js"
   },
   "scripts": {
     "install": "node install.js"

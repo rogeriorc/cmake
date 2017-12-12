@@ -1,19 +1,25 @@
 'use strict';
 
 const path = require('path'),
-    semver = require('semver'),
-    BinWrapper = require('bin-wrapper');
+	semver = require('semver'),
+	BinWrapper = require('bin-wrapper');
 
-var version = require('./package.json').version,
-    folder = semver.major(version) + '.' + semver.minor(version),
-    url = 'https://cmake.org/files/v' + folder + '/cmake-' + version + '-',
-    win32Sufix = 'win64-x64.zip',
-    linuxSufix = 'Linux-x86_64.tar.gz',
-    darwinSufix = 'Darwin-x86_64.tar.gz';
+var pkg = require('./package.json'),
+	version = (semver.major(pkg.version) === 0) ? '3.9.1' : pkg.version,
+	folder = semver.major(version) + '.' + semver.minor(version),
+	baseUrl = 'https://cmake.org/files/v' + folder + '/cmake-' + version,
+	source = {
+		linux: `${baseUrl}-Linux-x86_64.tar.gz`,
+		win: `${baseUrl}-win64-x64.zip`,
+		osx: `${baseUrl}-Darwin-x86_64.tar.gz`
+	},
+	homeDir = (process.env.HOME || process.env.USERPROFILE || process.env.HOMEPATH),
+	target = path.join(homeDir, '.bin-wrapper', pkg.name, version),
+	file = (process.platform === 'win32' ? path.join('bin', 'cmake.exe') : path.join('bin', 'cmake'));
 
 module.exports = new BinWrapper()
-    .src(`${url}${darwinSufix}`, 'darwin')
-    .src(`${url}${linuxSufix}`, 'linux')
-    .src(`${url}${win32Sufix}`, 'win32')
-    .dest(path.join(__dirname, 'vendor'))
-    .use(process.platform === 'win32' ? 'bin/cmake.exe' : 'bin/cmake');
+	.src(source.osx, 'darwin')
+	.src(source.linux, 'linux')
+	.src(source.win, 'win32')
+	.dest(target)
+	.use(file);
