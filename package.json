@@ -1,7 +1,7 @@
 {
   "name": "cmake-cli",
-  "version": "0.0.1",
-  "description": "",
+  "version": "0.0.2",
+  "description": "A Wrapper to CMake",
   "main": "index.js",
   "bin": {
     "cmake": "cli.js"
@@ -10,9 +10,13 @@
     "install": "node install.js"
   },
   "author": "",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rogeriorc/cmake"
+  },
   "license": "MIT",
   "dependencies": {
-    "bin-wrapper": "^3.0.2",
-    "semver": "^5.4.1"
+    "bin-wrapper": "^4.0.0",
+    "semver": "^5.5.1"
   }
 }

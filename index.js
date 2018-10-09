@@ -5,7 +5,7 @@ const path = require('path'),
 	BinWrapper = require('bin-wrapper');
 
 var pkg = require('./package.json'),
-	version = (semver.major(pkg.version) === 0) ? '3.9.1' : pkg.version,
+	version = (semver.major(pkg.version) === 0) ? '3.12.3' : pkg.version,
 	folder = semver.major(version) + '.' + semver.minor(version),
 	baseUrl = 'https://cmake.org/files/v' + folder + '/cmake-' + version,
 	source = {

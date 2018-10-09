@@ -4,11 +4,20 @@
 
 const cmake = require('.');
 
-cmake.run(function(err) {
-	if (err)
-		console.error(err);
-	else
-		console.log('cmake installed!');
+cmake.run()
+	.then(() => {
+		console.log(`cmake installed!`);
 
-	process.exit();
-});
+		process.exit();
+	})
+	.catch((error) => {
+		console.error(error);
+
+		let code = -1;
+
+		if ((error) && (error.errno)) {
+			code = error.errno;
+		}
+
+		process.exit(code);
+	});
