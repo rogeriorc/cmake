@@ -1,6 +1,6 @@
 {
   "name": "cmake-cli",
-  "version": "0.0.4-SNAPSHOT",
+  "version": "0.0.4",
   "description": "A Wrapper to CMake",
   "main": "index.js",
   "bin": {
@@ -16,7 +16,7 @@
   },
   "license": "MIT",
   "dependencies": {
-    "bin-wrapper": "^4.0.0",
-    "semver": "^5.5.1"
+    "bin-wrapper": "^4.1.0",
+    "semver": "^6.3.0"
   }
 }
