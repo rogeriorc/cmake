@@ -2,17 +2,16 @@
 
 const path = require('path'),
 	semver = require('semver'),
-	BinWrapper = require('bin-wrapper'),
-	TARGET_VERSION = '3.15.5';
+	BinWrapper = require('bin-wrapper');
 
-var pkg = require('./package.json'),
-	version = (semver.major(pkg.version) === 0) ? TARGET_VERSION : pkg.version,
+let pkg = require('./package.json'),
+	version = pkg.config.cmake ? pkg.config.cmake : pkg.version,
 	folder = semver.major(version) + '.' + semver.minor(version),
 	baseUrl = 'https://cmake.org/files/v' + folder + '/cmake-' + version,
 	source = {
-		linux: `${baseUrl}-Linux-x86_64.tar.gz`,
-		win: `${baseUrl}-win64-x64.zip`,
-		osx: `${baseUrl}-Darwin-x86_64.tar.gz`
+		linux: `${baseUrl}-linux-x86_64.tar.gz`,
+		win: `${baseUrl}-windows-x86_64.zip`,
+		osx: `${baseUrl}-macos-universal.tar.gz`
 	},
 	homeDir = (process.env.HOME || process.env.USERPROFILE || process.env.HOMEPATH),
 	target = path.join(homeDir, '.bin-wrapper', pkg.name, version),
